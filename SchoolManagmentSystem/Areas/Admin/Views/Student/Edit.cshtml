@@ -1,0 +1,92 @@
+﻿@model SchoolManagment.UI.Areas.Admin.ViewModels.StudentViewModel
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Edit Student";
+}
+
+<h2>Edit Student</h2>
+
+<form asp-area="Admin" asp-controller="Student" asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <!-- Roll Number -->
+    <div class="mb-3">
+        <label asp-for="RollNumber" class="form-label"></label>
+        <input asp-for="RollNumber" class="form-control" />
+        <span asp-validation-for="RollNumber" class="text-danger"></span>
+    </div>
+
+    <!-- First Name -->
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <!-- Guardian Name -->
+    <div class="mb-3">
+        <label asp-for="GuardianName" class="form-label"></label>
+        <input asp-for="GuardianName" class="form-control" />
+        <span asp-validation-for="GuardianName" class="text-danger"></span>
+    </div>
+
+    <!-- Class Dropdown -->
+    <div class="mb-3">
+        <label asp-for="ClassId" class="form-label"></label>
+        <select asp-for="ClassId" asp-items="ViewBag.Classes" class="form-select">
+            <option value="">-- Select Class --</option>
+        </select>
+        <span asp-validation-for="ClassId" class="text-danger"></span>
+    </div>
+
+    <!-- Section Dropdown -->
+    <div class="mb-3">
+        <label asp-for="SectionId" class="form-label"></label>
+        <select asp-for="SectionId" asp-items="ViewBag.Sections" class="form-select">
+            <option value="">-- Select Section --</option>
+        </select>
+        <span asp-validation-for="SectionId" class="text-danger"></span>
+    </div>
+
+    <!-- Date of Birth -->
+    <div class="mb-3">
+        <label asp-for="DateOfBirth" class="form-label"></label>
+        <input asp-for="DateOfBirth" type="date" class="form-control" />
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Gender" class="form-label"></label>
+        <select asp-for="Gender" class="form-select" asp-items="ViewBag.Genders">
+            <option value="">-- Select Gender --</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <!-- Address -->
+    <div class="mb-3">
+        <label asp-for="Address" class="form-label"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-area="Admin" asp-controller="Student" asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+</form>
