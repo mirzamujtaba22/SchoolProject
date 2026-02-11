@@ -5,6 +5,7 @@ using SchoolManagement.Infrastructure.Repositories.SectionRepository;
 using SchoolManagement.Infrastructure.Repositories.UnitOfWork;
 using SchoolManagement.Infrastructure.Services;
 using SchoolManagment.Application.Interface.IUnitOfWork;
+using SchoolManagment.Application.Interface.Repositories;
 using SchoolManagment.Application.Interface.Services;
 using SchoolManagment.Application.Interface.StudentRepository;
 using System;

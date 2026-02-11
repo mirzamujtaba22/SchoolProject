@@ -1,5 +1,6 @@
 ﻿using SchoolManagement.Infrastructure.Persistence;
 using SchoolManagment.Application.Interface.IUnitOfWork;
+using SchoolManagment.Application.Interface.Repositories;
 using SchoolManagment.Application.Interface.StudentRepository;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace SchoolManagement.Infrastructure.Repositories.UnitOfWork
         public IStudentRepository Students { get; }
         public IClassRepository Classes { get; }
         public ISectionRepository Sections { get; }
+
+        //IStudentRepository IUnitOfWork.Students => throw new NotImplementedException();
 
         public UnitOfWork(
             StudentDbContext context,

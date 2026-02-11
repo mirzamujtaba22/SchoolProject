@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolManagment.Application.Interface.StudentRepository
+namespace SchoolManagment.Application.Interface.Repositories
 {
     public interface IStudentRepository
     {
-        Task AddStudentAsync(Student student);
-        Task<IEnumerable<Student>> GetAllStudentsAsync();
-        Task<Student?> GetStudentByIdAsync(int id);
-        Task UpdateStudentAsync(Student student);
+        Task AddStudentAsync(SchoolManagment.Domain.Entities.Student student);
+        Task<IEnumerable<SchoolManagment.Domain.Entities.Student>> GetAllStudentsAsync();
+        Task<SchoolManagment.Domain.Entities.Student?> GetStudentByIdAsync(int id);
+        Task UpdateStudentAsync(SchoolManagment.Domain.Entities.Student student);
         Task DeleteStudentAsync(int id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using SchoolManagment.Application.Interface.StudentRepository;
+﻿using SchoolManagment.Application.Interface.Repositories;
+using SchoolManagment.Application.Interface.StudentRepository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

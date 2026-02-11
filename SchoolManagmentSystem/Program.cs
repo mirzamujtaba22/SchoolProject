@@ -49,4 +49,6 @@ app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
 
+//await SeedData.InitializeAsync(app.Services);
+
 app.Run();

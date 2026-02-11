@@ -1,6 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolManagment.Application.Common.Security;
 using SchoolManagment.Domain.Entities;
+using System;
 
 namespace SchoolManagement.Infrastructure.Persistence
 {
@@ -18,6 +19,9 @@ namespace SchoolManagement.Infrastructure.Persistence
         public DbSet<Student> Students { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Section> Sections { get; set; }
+
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,7 +44,22 @@ namespace SchoolManagement.Infrastructure.Persistence
                 .WithMany(sec => sec.Students)
                 .HasForeignKey(s => s.SectionId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>().HasData(
+    new User
+    {
+        UserId = 1,
+        FullName = "System Admin",
+        Email = "admin@school.com",
+        PasswordHash = PasswordHasher.Hash("Admin@123"),
+        Role = "Admin",
+        IsActive = true
+    }
+);
+
         }
+
+
     }
 }
 

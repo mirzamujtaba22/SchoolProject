@@ -9,11 +9,6 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace SchoolManagment.Domain.Entities
 {
-    public enum Gender
-    {
-        Male = 0,
-        Female = 1
-    }
     public class Student
     {
 
@@ -49,6 +44,12 @@ namespace SchoolManagment.Domain.Entities
         public virtual User User { get; set; }
         public virtual Class Class { get; set; }
         public virtual Section Section { get; set; }
+    }
+
+    public enum Gender
+    {
+        Male = 0,
+        Female = 1
     }
 
 }

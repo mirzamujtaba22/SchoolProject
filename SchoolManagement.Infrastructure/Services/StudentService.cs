@@ -1,6 +1,6 @@
 ﻿using SchoolManagment.Application.Interface.IUnitOfWork;
 using SchoolManagment.Application.Interface.Services;
-using SchoolManagment.Application.Student;
+using SchoolManagment.Application.student;
 using SchoolManagment.Domain.Entities;
 using System;
 using System.Collections.Generic;

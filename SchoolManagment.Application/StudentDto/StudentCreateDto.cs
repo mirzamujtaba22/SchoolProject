@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolManagment.Application.Student
+namespace SchoolManagment.Application.student
 {
     public class StudentCreateDto
     {

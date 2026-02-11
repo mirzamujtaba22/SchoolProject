@@ -6,6 +6,7 @@ using SchoolManagement.Infrastructure.Services;
 using SchoolManagment.Application;
 using SchoolManagment.Application.Dtos;
 using SchoolManagment.Application.Interface.Services;
+using SchoolManagment.Application.student;
 using SchoolManagment.Domain.Entities;
 using SchoolManagment.UI.Areas.Admin.ViewModels;
 using System.Threading.Tasks;
@@ -98,59 +99,49 @@ namespace SchoolManagment.UI.Areas.Admin.Controllers
 
             return View();
         }
-        
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create(StudentViewModel model)
         {
-       
-
-            var defaultPassword = "Student@123"; // ya random generator
-            var passwordHash = BCrypt.Net.BCrypt.HashPassword(defaultPassword); // hash the password
-
-
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                await LoadDropdowns(model);
+                return View(model);
+            }
 
-                var user = new User
+            var dto = new StudentCreateDto
             {
-                FullName = model.FirstName + " " + model.LastName,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
                 Email = model.Email,
-                PasswordHash = passwordHash,
-                Role = "Student",
-                IsActive = true
+                RollNumber = model.RollNumber,
+                ClassId = (int)model.ClassId,
+                SectionId = model.SectionId,
+                DateOfBirth = model.DateOfBirth,
+                Gender = model.Gender,
+                Address = model.Address,
+                GuardianName = model.GuardianName
             };
 
+            await _studentService.AddStudentAsync(dto);
+            return RedirectToAction(nameof(Index));
+        }
 
-          
-                var Student = new Student
-                {
-                    RollNumber = model.RollNumber,
-                    ClassId = model.ClassId,
-                    SectionId = model.SectionId,
-                    DateOfBirth = model.DateOfBirth,
-                    Gender = model.Gender,
-                    Address = model.Address,
-                    GuardianName = model.GuardianName,
-                    User = user
+        private async Task LoadDropdowns(StudentViewModel model)
+        {
+            ViewBag.Classes = new SelectList(
+                await _classService.GetClassesAsync(),
+                "ClassId", "ClassName", model.ClassId);
 
-                };
+            ViewBag.Sections = new SelectList(
+                await _sectionService.GetSectionsAsync(),
+                "SectionId", "SectionName", model.SectionId);
 
-
-
-
-                await _studentService.AddStudentAsync(Student);
-                return RedirectToAction("Index");
-            }
-            var Classes = await _classService.GetClassesAsync();
-           var Sections = await _sectionService.GetSectionsAsync();
-
-            ViewBag.Classes = new SelectList(Classes, "ClassId", "ClassName", model.ClassId);
-            ViewBag.Sections = new SelectList(Sections, "SectionId", "SectionName", model.SectionId);
-            ViewBag.Genders = new SelectList(Enum.GetValues(typeof(Gender)), model.Gender);
-
-            return View(model);
+            ViewBag.Genders = new SelectList(
+                Enum.GetValues(typeof(Gender)), model.Gender);
         }
 
         public async Task<IActionResult> Edit(int id)

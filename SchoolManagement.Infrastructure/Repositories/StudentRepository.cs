@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Infrastructure.Persistence;
+using SchoolManagment.Application.Interface.Repositories;
 using SchoolManagment.Application.Interface.StudentRepository;
 using SchoolManagment.Domain.Entities;
 using System;
