@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Web.Helpers;
 using static System.Collections.Specialized.BitVector32;
 
-namespace SchoolManagment.UI.Areas.Admin.Controllers
+namespace SchoolManagment.UI.Controllers
 {
     [Area("Admin")]
     public class StudentController : Controller

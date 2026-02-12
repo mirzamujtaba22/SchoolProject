@@ -17,7 +17,7 @@ namespace SchoolManagement.Infrastructure.Persistence
             var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
 
             // 🔒 Check if Admin already exists (Idempotent)
-            var existingAdmin = (await unitOfWork.Users.GetAllUsersAsync())
+            var existingAdmin = (await unitOfWork.Users.GetAllAsync())
                 .FirstOrDefault(u => u.Role == "Admin");
 
             if (existingAdmin != null)
@@ -32,7 +32,7 @@ namespace SchoolManagement.Infrastructure.Persistence
                 IsActive = true
             };
 
-            await unitOfWork.Users.AddUserAsync(admin);
+            await unitOfWork.Users.AddAsync(admin);
             await unitOfWork.CompleteAsync();
         }
     }

@@ -13,6 +13,8 @@ namespace SchoolManagment.Application.Interface.IUnitOfWork
         IClassRepository Classes { get; }
         ISectionRepository Sections { get; }
 
+        IUserRepository Users { get; }
+
         Task<int> CompleteAsync();
     }
 }
