@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Infrastructure.Repositories;
 using SchoolManagement.Infrastructure.Repositories.SectionRepository;
 using SchoolManagement.Infrastructure.Repositories.UnitOfWork;
+using SchoolManagement.Infrastructure.Repositories.UserRepository;
 using SchoolManagement.Infrastructure.Services;
 using SchoolManagment.Application.Interface.IUnitOfWork;
 using SchoolManagment.Application.Interface.Repositories;
@@ -25,7 +26,7 @@ namespace SchoolManagement.Infrastructure
             services.AddScoped<ISectionRepository, SectionRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IStudentService, StudentService>();
-
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IClassService, ClassService>();
             services.AddScoped<ISectionService, SectionService>();
 

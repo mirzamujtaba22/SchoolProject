@@ -10,15 +10,22 @@ using SchoolManagement.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+
+
 // Add services to the container.
-builder.Services.AddRazorPages();
+//builder.Services.AddRazorPages();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-
+builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<StudentDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")
         ?? "Server=.;Database=SchoolDB;Trusted_Connection=True;TrustServerCertificate=True;"));
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -29,11 +36,15 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseRouting();
 
+
+app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -42,12 +53,12 @@ app.MapControllerRoute(
     );
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}"
+    pattern: "{controller=Account}/{action=Login}/{id?}"
 );
 
 app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+//app.MapRazorPages()
+//   .WithStaticAssets();
 
 //await SeedData.InitializeAsync(app.Services);
 

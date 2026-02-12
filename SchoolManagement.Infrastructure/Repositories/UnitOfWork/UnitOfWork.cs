@@ -18,18 +18,22 @@ namespace SchoolManagement.Infrastructure.Repositories.UnitOfWork
         public IClassRepository Classes { get; }
         public ISectionRepository Sections { get; }
 
+        public IUserRepository Users { get; }
+
         //IStudentRepository IUnitOfWork.Students => throw new NotImplementedException();
 
         public UnitOfWork(
             StudentDbContext context,
             IStudentRepository studentRepository,
             IClassRepository classRepository,
+             IUserRepository userRepository,
             ISectionRepository sectionRepository)
         {
             _context = context;
             Students = studentRepository;
             Classes = classRepository;
             Sections = sectionRepository;
+            Users = userRepository;
         }
 
         public async Task<int> CompleteAsync()
