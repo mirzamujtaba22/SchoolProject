@@ -1,0 +1,10 @@
+﻿<h2>Dashboard</h2>
+
+<p>Logged in as: @ViewBag.Email</p>
+<p>Role: @ViewBag.Role</p>
+<p>Full Name: @ViewBag.FullName</p>
+
+<form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Logout</button>
+</form>

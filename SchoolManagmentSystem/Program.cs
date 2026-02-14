@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Infrastructure;
 using SchoolManagement.Infrastructure.Persistence;
 using SchoolManagement.Infrastructure.Repositories;
 using SchoolManagement.Infrastructure.Repositories.UnitOfWork;
@@ -6,17 +8,19 @@ using SchoolManagement.Infrastructure.Services;
 using SchoolManagment.Application.Interface.IUnitOfWork;
 using SchoolManagment.Application.Interface.Services;
 using SchoolManagment.Application.Interface.StudentRepository;
-using SchoolManagement.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-});
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Logout";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+        options.SlidingExpiration = true;
+    });
 
-// Add services to the container.
 //builder.Services.AddRazorPages();
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -43,7 +47,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 
-app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
